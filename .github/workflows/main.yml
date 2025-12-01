@@ -1,0 +1,25 @@
+name: Deploy Static Page
+
+on:
+  push:
+    branches:
+      - main # Jab bhi main branch par push hoga, yeh chalega
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.' # Project ke root folder ko upload karo
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
